@@ -1,0 +1,427 @@
+/* @font-face */
+@font-face {
+  font-family: "Geist";
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/Geist-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Geist";
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/Geist-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Geist";
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/fonts/Geist-Bold.woff2") format("woff2");
+}
+
+/* all variables */
+/* fonts */
+:root {
+  /* font-family */
+  --ff: "Geist", Helvetica, Arial, sans-serif;
+  --ff-r: 400;
+  --ff-m: 500;
+  --ff-b: 700;
+
+  /* font-size */
+  --font-5: 6rem;
+  --font-4: 4rem;
+  --font-3: 2.25rem;
+  --font-2: 1.5rem;
+  --font-1: 1.125rem;
+  --font-0: 1rem;
+  --font-s1: 0.75rem;
+
+  /* line-height */
+  --lh-s2: 1.1;
+  --lh-s1: 1.2;
+  --lh: 1.6;
+
+  /* spacing */
+  --space-s3: 0.25rem;
+  --space-s2: 0.5rem;
+  --space-s1: 0.75rem;
+  --space-0: 1rem;
+  --space-1: 1.5rem;
+  --space-2: 2rem;
+  --space-3: 2.5rem;
+  --space-4: 3rem;
+  --space-5: 4rem;
+
+  --blue: #1e7fde;
+  --violet: #517dfa;
+  --cyan: #53efe6;
+  --red: #e36081;
+  --yellow: #ffa239;
+
+  --gradient-r: linear-gradient(to right, var(--red), var(--violet));
+  --gradient-b: linear-gradient(to right, var(--blue), var(--cyan));
+  --gradient-y: linear-gradient(to right, var(--red), var(--yellow));
+
+  --fg: #323246;
+  --gray-50: #5f6981;
+  --bg: #fdfbfb;
+}
+
+/* style reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  background-color: var(--bg);
+  font-family: var(--ff);
+  color: var(--fg);
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  scroll-behavior: smooth;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote {
+  margin: 0;
+  padding: 0;
+  font-weight: unset; /*clearing out browser's pseudo-bold types*/
+}
+body {
+  min-block-size: 100vh;
+}
+img,
+video {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* typography default*/
+h1,
+h2,
+h3,
+h4 {
+  max-inline-size: 60rem;
+  text-wrap: balance;
+}
+h1 {
+  font: var(--ff-b) var(--font-4) / var(--lh-s2) var(--ff);
+  letter-spacing: -0.04em;
+}
+h2,
+.h2 {
+  font: var(--ff-b) var(--font-3) / var(--lh-s2) var(--ff);
+  letter-spacing: -0.04em;
+}
+h3 {
+  font: var(--ff-b) var(--font-2) / var(--lh-s1) var(--ff);
+  letter-spacing: -0.02em;
+}
+:is(h1, h2, h3):has(+ :is(h2, h3, h4, p, img, video, blockquote, figure, div)) {
+  margin-block-end: var(--space-1);
+}
+p {
+  font: var(--ff-r) var(--font-1) / var(--lh) var(--ff);
+  color: var(--gray-50);
+  max-inline-size: 75ch;
+}
+
+p:has(+ :is(h4, p, img, video, blockquote, figure, div)) {
+  margin-block-end: var(--space-s1);
+}
+p:has(+ :is(h2, h3)) {
+  margin-block-end: var(--space-4);
+}
+figcaption {
+  font-size: var(--font-s1);
+}
+a {
+  color: unset;
+  text-decoration: none;
+}
+/* colorful underline all day every day */
+[class^="nav-link"] {
+  /* font-weight: var(--ff-m); */
+  line-height: var(--space-2);
+  background-image: linear-gradient(
+    to right,
+    var(--violet) 0%,
+    var(--red) 25%,
+    var(--yellow) 50%,
+    transparent 50%
+  );
+  background-size: 200% 3px;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  transition: background-position 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+[class^="nav-link"]:hover {
+  background-position: 0% 100%;
+}
+
+.subtitle {
+  font: var(--ff-m) var(--font-s1) / var(--lh) var(--ff);
+  margin-bottom: var(--space-0);
+}
+/* icon */
+.icon-link {
+  display: inline-flex;
+  gap: 0.25em;
+  align-items: baseline;
+}
+.icon {
+  height: 1cap;
+  height: 0.75em; /*fallback*/
+}
+/* typography util classes */
+/* variable size for big header */
+.font-5 {
+  font-size: clamp(var(--font-4), 8vw, var(--font-5));
+  line-height: var(--lh-s2);
+}
+.color\:b {
+  color: transparent;
+  background: var(--gradient-b);
+  background-clip: text;
+}
+.color\:y {
+  color: transparent;
+  background: var(--gradient-y);
+  background-clip: text;
+}
+.color\:r {
+  color: transparent;
+  background: var(--gradient-r);
+  background-clip: text;
+}
+.text\:center {
+  text-align: center;
+}
+
+/* buttons */
+button,
+.button {
+  border: none;
+  outline: none;
+  font-family: unset;
+  font-size: unset;
+  font-weight: var(--ff-m);
+  color: var(--fg);
+  border-radius: 9999px;
+  padding: var(--space-s2) var(--space-1);
+
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  border: 1.5px solid transparent;
+}
+
+.btn-1 {
+  background:
+    linear-gradient(
+        to right,
+        rgba(242, 142, 183, 0.1),
+        rgba(103, 150, 212, 0.1)
+      )
+      padding-box,
+    radial-gradient(
+        circle at center right,
+        var(--bg) 0%,
+        var(--bg) 50%,
+        var(--blue) 50%,
+        var(--red) 85%,
+        var(--yellow) 115%
+      )
+      padding-box,
+    linear-gradient(
+        to right,
+        var(--red) 0%,
+        var(--violet) 50%,
+        var(--blue) 49%,
+        var(--red) 100%
+      )
+      border-box;
+  background-size: 200% 100%;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+}
+.btn-1:hover {
+  background-position: 0% 100%;
+  color: white;
+}
+/* frames & illustrations */
+.video-frame {
+  inline-size: 100%;
+  /* aspect-ratio: 16/9; */
+  overflow: hidden;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(to right, var(--bg), var(--bg)) padding-box,
+    linear-gradient(
+        to right,
+        var(--blue) 0%,
+        var(--violet) 50%,
+        var(--cyan) 100%
+      )
+      border-box;
+  background-size: 100% 100%;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  border-radius: var(--space-0);
+}
+.illust {
+  max-block-size: 6rem;
+  max-inline-size: 6rem;
+}
+
+/* everi layout */
+/* stack */
+.stack {
+  --s-space: var(--space-0);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-space);
+}
+.stack-size\:s {
+  --s-space: var(--space-s2);
+}
+.stack-size\:m {
+  --s-space: var(--space-4);
+}
+.stack-size\:l {
+  --s-space: 8rem;
+}
+/* switcher */
+.switcher {
+  --switch: 768px;
+  --sw-space: var(--space-0);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--sw-space);
+}
+:has(.switcher).reverse {
+  flex-direction: row-reverse;
+}
+.switcher > * {
+  flex-grow: 1;
+  flex-basis: calc((var(--switch) - 100%) * 999);
+}
+.switcher-size\:m {
+  --sw-space: var(--space-2);
+}
+.switcher\:center {
+  align-items: center;
+}
+/* util layout classes */
+.center {
+  align-items: center;
+  margin-inline: auto;
+}
+.mx-width {
+  --inline-size: 1378px;
+  box-sizing: content-box;
+  width: min(calc(100% - var(--space-1) * 2), var(--inline-size));
+  margin-inline: auto;
+}
+.relative {
+  position: relative;
+}
+/* cluster */
+.cluster {
+  --c-space: var(--space-0);
+  display: flex;
+  flex-direction: row;
+  gap: 0 var(--c-space);
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/* sections */
+/* header */
+nav {
+  z-index: 999;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: var(--bg);
+  padding-block: clamp(var(--space-0), 3vh, var(--space-2));
+}
+#nav-wrapper {
+  align-items: center;
+}
+a[id^="nav-icon-"] > img {
+  max-block-size: var(--space-4);
+}
+#nav-desktop {
+  --c-space: var(--space-2);
+}
+
+#splash {
+  margin-block-start: 7.5vh;
+}
+#splash-bg {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  margin-inline: -1rem;
+}
+
+.card {
+  --card-border: var(--fg);
+  padding: var(--space-1);
+  border-radius: var(--space-s1);
+  border: 1px solid var(--card-border);
+}
+
+footer {
+  margin-block-start: var(--space-5);
+  padding-block: var(--space-2);
+  border-top: 1px solid var(--gray-50);
+}
+footer p {
+  color: var(--gray-50);
+  font-size: var(--font-s1);
+}
+
+.blog-entry {
+  width: 100%;
+  align-items: center;
+  padding-block: var(--space-1);
+  border-bottom: 1px solid var(--gray-50);
+}
+.blog-entry .arrow {
+  transition: all 0.3s ease-in-out;
+}
+.blog-entry:hover .arrow {
+  transform: translate3d(3px, -3px, 0);
+}
+
+article {
+  margin-inline: auto;
+  padding-inline: var(--space-1);
+}
+
+details {
+  cursor: pointer;
+}
+details * {
+  transition: all 0.3s ease-in;
+}
+details > div {
+  margin-block-start: var(--space-2);
+}
+details:hover h2 {
+  transform: translateX(var(--space-s1));
+}
+details[open] .open-icon {
+  transform: rotate(45deg);
+}
